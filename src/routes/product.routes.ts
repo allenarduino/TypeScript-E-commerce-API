@@ -1,5 +1,8 @@
-import { Router } from 'express';
+import { Router,Request, Response } from 'express';
 const router = Router();
+import multer from '../middlewares/multer';
+import path from "path";
+import fs from "fs-extra";
 
 import { 
      getProducts,
@@ -9,13 +12,18 @@ import {
      updateProduct 
     } from '../controllers/product.controller';
 
-router.route('/products')
-      .get(getProducts)
-      .post(createProduct);
 
-router.route('/products/:id')
-      .get(getSingleProduct)
-      .delete(deleteProduct)
-      .put(updateProduct);
+
+
+
+
+const type = multer.single("product_img");
+
+router.post("/create_product",type,createProduct);
+router.get("/get_products",getProducts);
+router.get("/products/:id",getSingleProduct);
+router.delete("/products/:id",deleteProduct);
+router.put("/products/:id",updateProduct)
+
 
 export default router; 
