@@ -5,5 +5,5 @@ export interface Product{
     product_img:string,
     category:string,
     description:string,
-    created_at:Date
+    created_at?:Date
 }
